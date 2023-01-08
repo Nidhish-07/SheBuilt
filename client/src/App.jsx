@@ -1,17 +1,17 @@
 import React from 'react'
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
-import Home from './pages/Home'
+import Login from "./pages/Login"
 
-// const router=createBrowserRouter({
-//   path:"/",
-//   element:<
-// })
+const router = createBrowserRouter([{
+
+  path: "/",
+  element: <Login />
+
+}])
 
 const App = () => {
   return (
-    <div>
-      <Home></Home>
-    </div>
+    <RouterProvider router={router} />
   )
 }
 
