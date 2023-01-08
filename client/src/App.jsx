@@ -2,8 +2,9 @@ import React from "react";
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
-import Jobs from './pages/Jobs/index.jsx'
+// import Jobs from './pages/Jobs/index.jsx'
 import Footer from "./components/footer";
+import Home from "./components/Home";
 
 const Layout = () => {
   return (
@@ -25,7 +26,12 @@ const router = createBrowserRouter([
   //   path: "/jobs",
   //   element: <Layout></Layout>,
   //   children: [{ path: "/jobs", element: <Jobs/> }],
-  // }
+  // },
+  {
+    path: "/home",
+    element: <Layout></Layout>,
+    children: [{ path: "/home", element: <Home></Home> }],
+  },
 ]);
 
 const App = () => {
