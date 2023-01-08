@@ -22,6 +22,15 @@ const Navbar = () => {
     const email = useSelector(selectedUserEmail);
     const photo = useSelector(selectedUserPhoto);
 
+    React.useEffect(() => {
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                setUser(user)
+                navigate("/home")
+            }
+        })
+    }, [username])
+
     const setUser = (user) => {
         dispatch(
             setUserLoginDetails({
