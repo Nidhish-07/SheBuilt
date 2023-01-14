@@ -12,6 +12,7 @@ import {
     selectedUserEmail,
     selectedUserName,
     selectedUserPhoto,
+    setSignOutState,
     setUserLoginDetails,
 } from "../features/user/userSlice";
 
@@ -43,12 +44,22 @@ const Navbar = () => {
 
     const authHandler = async () => {
         // const provider = new GoogleAuthProvider()
-        auth
-            .signInWithPopup(provider)
-            .then((result) => {
-                setUser(result.user);
-            })
-            .catch((err) => alert(err));
+
+        if (!username) {
+            auth
+
+                .signInWithPopup(provider)
+                .then((result) => {
+                    setUser(result.user);
+                })
+                .catch((err) => alert(err.message));
+        } else if (username) {
+            auth.signOut().then(() => {
+                dispatch(setSignOutState())
+                navigate("/")
+            }
+            ).catch(err => alert(err.message))
+        }
     };
 
     return (
@@ -112,7 +123,13 @@ const Navbar = () => {
                 </div>
             )}
 
-            <img src={photo} alt={username} className="h-full " />
+            <div className={`relative h-12  w-12 flex cursor-pointer items-center justify-center sign_out ${styles.sign_out}`}>
+
+                <img src={photo} alt={username} className="h-full rounded-full w-full " />
+                <div className={`relative top-12 right-8 bg-gray-100 border-1 border-solid border-zinc-500 rounded shadow-md p-2 text-sm tracking-[3px] w-28 opacity-0 dropdown ${styles.dropdown}`}>
+                    <span onClick={authHandler}>Sign Out</span>
+                </div>
+            </div>
         </div>
     );
 };

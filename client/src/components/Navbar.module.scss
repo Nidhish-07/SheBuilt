@@ -24,3 +24,13 @@
     }
   }
 }
+
+.sign_out{
+   
+  &:hover{
+    .dropdown{
+      opacity: 1;
+      transition-duration: 1s;
+    }
+  }
+}
